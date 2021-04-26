@@ -5,42 +5,28 @@ using Sirenix.Utilities.Editor;
 #pragma warning disable
 
 using UnityEngine;
-using Sirenix.OdinInspector.Editor.ValueResolvers;
 
 
 public class ColoredBoxGroupDrawer : OdinGroupDrawer<ColoredBoxGroupAttribute> 
 {
-    private ValueResolver<string> labelGetter;
 
-    
-    /// <summary>
-    /// initialize values for colors, labels, etc
-    /// </summary>
-    protected override void Initialize()
-    {
-        labelGetter = ValueResolver.GetForString(Property, Attribute.LabelText ?? Attribute.GroupName);
-    }
-
-    
     /// <summary>
     /// Draw the stuff
     /// </summary>
     /// <param name="label">Label string</param>
     protected override void DrawPropertyLayout(GUIContent label)
     {
-        GUIHelper.PushColor(new Color(Attribute.R, Attribute.G, Attribute.B, Attribute.A));
-        labelGetter.DrawError();
 
-        string headerLabel = null;
+        string headerLabel = Attribute.LabelText;
         if (Attribute.ShowLabel)
         {
-            headerLabel = labelGetter.GetValue();
-            if (string.IsNullOrEmpty(headerLabel))
+            if (string.IsNullOrEmpty(Attribute.LabelText))
             {
                 headerLabel = "";
             }
         }
         
+        GUIHelper.PushColor(new Color(Attribute.R, Attribute.G, Attribute.B, Attribute.A));
         SirenixEditorGUI.BeginBox();
         SirenixEditorGUI.BeginBoxHeader();
         GUIHelper.PopColor(); 
