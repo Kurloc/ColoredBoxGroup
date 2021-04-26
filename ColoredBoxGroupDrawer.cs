@@ -1,15 +1,29 @@
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
-
-    
-#pragma warning disable
-
 using UnityEngine;
 
+#if ODIN_INSPECTOR_3
+using Sirenix.OdinInspector.Editor.ValueResolvers;
+#endif
+
+#pragma warning disable
 
 public class ColoredBoxGroupDrawer : OdinGroupDrawer<ColoredBoxGroupAttribute> 
 {
+    
+#if ODIN_INSPECTOR_3
+    private ValueResolver<string> labelGetter;
+    
+    /// <summary>
+    /// initialize values for colors, labels, etc
+    /// </summary>
+    protected override void Initialize()
+    {
+        labelGetter = ValueResolver.GetForString(Property, Attribute.LabelText ?? Attribute.GroupName);
+    }
+#endif
 
+    
     /// <summary>
     /// Draw the stuff
     /// </summary>
@@ -18,20 +32,30 @@ public class ColoredBoxGroupDrawer : OdinGroupDrawer<ColoredBoxGroupAttribute>
     {
 
         string headerLabel = Attribute.LabelText;
+
         if (Attribute.ShowLabel)
         {
-            if (string.IsNullOrEmpty(Attribute.LabelText))
+
+#if ODIN_INSPECTOR_3
+            labelGetter.DrawError();
+            headerLabel = labelGetter.GetValue();
+#endif
+            
+            if (string.IsNullOrEmpty(headerLabel))
             {
                 headerLabel = "";
             }
         }
-        
-        GUIHelper.PushColor(new Color(Attribute.R, Attribute.G, Attribute.B, Attribute.A));
+
+        GUIHelper.PushColor(new Color(Attribute.R, Attribute.G, Attribute.B, Attribute.A));   
         SirenixEditorGUI.BeginBox();
         SirenixEditorGUI.BeginBoxHeader();
-        GUIHelper.PopColor(); 
-        
-        SirenixEditorGUI.Title(headerLabel, null, TextAlignment.Left, false, Attribute.BoldLabel);
+        {
+            GUIHelper.PopColor();
+
+            if (Attribute.ShowLabel)
+                SirenixEditorGUI.Title(headerLabel, null, TextAlignment.Left, false, Attribute.BoldLabel);
+        }
         SirenixEditorGUI.EndBoxHeader();
 
         for (int i = 0; i < Property.Children.Count; i++)
