@@ -14,7 +14,16 @@ Bold Title
 
 Code Ex
 ```
+    // Implicit Title from Groupname
     [ColoredBoxGroup("Colored Box Group Example",
+                     .76f, .23f, .64f, .98f,
+                     true, false, true)]
+    public string IAmAColoredBoxGroupExampleValue;
+
+
+    // Explicit Title from Groupname
+    [ColoredBoxGroup("Colored Box Group Example",
+                     "I am the label/title text",
                      .76f, .23f, .64f, .98f,
                      true, false, true)]
     public string IAmAColoredBoxGroupExampleValue;
