@@ -11,7 +11,22 @@ public class ColoredBoxGroupAttribute : BoxGroupAttribute
     public bool BoldLabel;
     public string LabelText;
 
+    public ColoredBoxGroupAttribute(
+        string @group,
+        float r, float g, float b, float a,
+        bool showLabel = true,
+        bool centerLabel = false,
+        bool boldLabel = false,
+        float order = 0) : base(@group, showLabel, centerLabel, order)
+    {
+        R = r;
+        G = g;
+        B = b;
+        A = a;
 
+        BoldLabel = boldLabel;
+    }
+    
     public ColoredBoxGroupAttribute(
         string @group,
         string label,
