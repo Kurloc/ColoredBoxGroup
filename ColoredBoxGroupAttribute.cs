@@ -10,6 +10,8 @@ public class ColoredBoxGroupAttribute : BoxGroupAttribute
     public float R, G, B, A;
     public bool BoldLabel;
     public string LabelText;
+    public int MarginTop { get; set; }
+    public int MarginBottom { get; set; }
 
     public ColoredBoxGroupAttribute(
         string @group,
