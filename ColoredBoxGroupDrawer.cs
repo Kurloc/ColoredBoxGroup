@@ -30,6 +30,7 @@ public class ColoredBoxGroupDrawer : OdinGroupDrawer<ColoredBoxGroupAttribute>
     /// <param name="label">Label string</param>
     protected override void DrawPropertyLayout(GUIContent label)
     {
+        GUILayout.Space(Attribute.MarginTop);
 
         string headerLabel = Attribute.LabelText;
 
@@ -54,7 +55,17 @@ public class ColoredBoxGroupDrawer : OdinGroupDrawer<ColoredBoxGroupAttribute>
             GUIHelper.PopColor();
 
             if (Attribute.ShowLabel)
-                SirenixEditorGUI.Title(headerLabel, null, TextAlignment.Left, false, Attribute.BoldLabel);
+            {
+                if(Attribute.CenterLabel)
+                {
+                    SirenixEditorGUI.Title(headerLabel, null, TextAlignment.Center, false, Attribute.BoldLabel);
+                }
+                else
+                {
+                    SirenixEditorGUI.Title(headerLabel, null, TextAlignment.Left, false, Attribute.BoldLabel);
+                }
+
+            }
         }
         SirenixEditorGUI.EndBoxHeader();
 
@@ -64,5 +75,7 @@ public class ColoredBoxGroupDrawer : OdinGroupDrawer<ColoredBoxGroupAttribute>
         }
 
         SirenixEditorGUI.EndBox();
+
+        GUILayout.Space(Attribute.MarginBottom);
     }
 }
