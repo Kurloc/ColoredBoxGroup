@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using UnityEngine;
@@ -79,3 +80,4 @@ public class ColoredBoxGroupDrawer : OdinGroupDrawer<ColoredBoxGroupAttribute>
         GUILayout.Space(Attribute.MarginBottom);
     }
 }
+#endif
