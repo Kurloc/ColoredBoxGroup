@@ -1,0 +1,20 @@
+{
+  "name": "sirenix.odininspector.colorboxgroup",
+  "version": "1.0.0",
+  "displayName": "Sirenix.ColorBoxGroup",
+  "description": "Colorized Version of BoxGroup for the Odin Inspector",
+  "unity": "2019.4",
+  "unityRelease": "0b5",
+  "documentationUrl": "https://github.com/Kurloc/ColoredBoxGroup/blob/main/README.md",
+  "licensesUrl": "https://github.com/Kurloc/ColoredBoxGroup/blob/main/LICENSE",
+  "dependencies": {},
+  "keywords": [
+    "odin",
+    "editor"
+  ],
+  "author": {
+    "name": "Kurloc",
+    "email": "brandon.ingram@gmail.com",
+    "url": "https://github.com/Kurloc/ColoredBoxGroup"
+  }
+}
