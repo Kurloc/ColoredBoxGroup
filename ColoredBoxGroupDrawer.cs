@@ -3,28 +3,8 @@ using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using UnityEngine;
 
-#if ODIN_INSPECTOR_3
-using Sirenix.OdinInspector.Editor.ValueResolvers;
-#endif
-
-#pragma warning disable
-
 public class ColoredBoxGroupDrawer : OdinGroupDrawer<ColoredBoxGroupAttribute> 
 {
-    
-#if ODIN_INSPECTOR_3
-    private ValueResolver<string> labelGetter;
-    
-    /// <summary>
-    /// initialize values for colors, labels, etc
-    /// </summary>
-    protected override void Initialize()
-    {
-        labelGetter = ValueResolver.GetForString(Property, Attribute.LabelText ?? Attribute.GroupName);
-    }
-#endif
-
-    
     /// <summary>
     /// Draw the stuff
     /// </summary>
@@ -33,16 +13,10 @@ public class ColoredBoxGroupDrawer : OdinGroupDrawer<ColoredBoxGroupAttribute>
     {
         GUILayout.Space(Attribute.MarginTop);
 
-        string headerLabel = Attribute.LabelText;
+        var headerLabel = Attribute.LabelText;
 
         if (Attribute.ShowLabel)
         {
-
-#if ODIN_INSPECTOR_3
-            labelGetter.DrawError();
-            headerLabel = labelGetter.GetValue();
-#endif
-            
             if (string.IsNullOrEmpty(headerLabel))
             {
                 headerLabel = "";
@@ -57,22 +31,16 @@ public class ColoredBoxGroupDrawer : OdinGroupDrawer<ColoredBoxGroupAttribute>
 
             if (Attribute.ShowLabel)
             {
-                if(Attribute.CenterLabel)
-                {
-                    SirenixEditorGUI.Title(headerLabel, null, TextAlignment.Center, false, Attribute.BoldLabel);
-                }
-                else
-                {
-                    SirenixEditorGUI.Title(headerLabel, null, TextAlignment.Left, false, Attribute.BoldLabel);
-                }
-
+                SirenixEditorGUI.Title(headerLabel, null,
+                                       Attribute.CenterLabel ? TextAlignment.Center : TextAlignment.Left, false,
+                                       Attribute.BoldLabel);
             }
         }
         SirenixEditorGUI.EndBoxHeader();
 
-        for (int i = 0; i < Property.Children.Count; i++)
+        foreach (var t in Property.Children)
         {
-            Property.Children[i].Draw();
+            t.Draw();
         }
 
         SirenixEditorGUI.EndBox();
