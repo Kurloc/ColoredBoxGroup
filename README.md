@@ -3,14 +3,12 @@
 
 
 ## Color Box Groups
-* Drop-in replacement for a regular Boxgroup but can be colored and given a bold title.
+* Built-on Boxgroup and allows for coloring, titles and nesting.
 
 
 ## Examples
-Normal Title
-![Image](https://gyazo.com/5cac08d156d196cbf39fb89555d1a877.png)
-Bold Title
-![Image](https://gyazo.com/67849ecd8c13daeebeb2d26374db858e.png)
+![image](https://github.com/Kurloc/ColoredBoxGroup/assets/57206908/c746b10e-e73e-4a52-abdf-ed11fa60438a)
+
 
 Code Ex
 ```
