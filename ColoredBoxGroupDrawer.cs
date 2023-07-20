@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ColoredBoxGroupDrawer : OdinGroupDrawer<ColoredBoxGroupAttribute> 
 {
+
     /// <summary>
     /// Draw the stuff
     /// </summary>
