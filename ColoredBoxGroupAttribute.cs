@@ -10,9 +10,8 @@ namespace Sirenix.OdinInspector.ColoredBoxGroup
         public readonly float R, G, B, A;
         public readonly bool  BoldLabel;
 
-        public int MarginTop    { get; set; }
-        public int MarginBottom { get; set; }
-
+        public readonly int MarginTop, MarginBottom;
+        
         public ColoredBoxGroupAttribute(
             string @group,
             float  r           = 0,
@@ -20,6 +19,7 @@ namespace Sirenix.OdinInspector.ColoredBoxGroup
             float  b           = 0,
             float  a           = 1,
             int    marginTop   = 0,
+            int    marginBottom = 0,
             bool   showLabel   = true,
             bool   centerLabel = false,
             bool   boldLabel   = false,
@@ -31,6 +31,7 @@ namespace Sirenix.OdinInspector.ColoredBoxGroup
             B         = b;
             A         = a;
             MarginTop = marginTop;
+            MarginBottom = marginBottom;
 
             BoldLabel = boldLabel;
         }
@@ -43,6 +44,7 @@ namespace Sirenix.OdinInspector.ColoredBoxGroup
             float  b           = 0,
             float  a           = 1,
             int    marginTop   = 0,
+            int    marginBottom = 0,
             bool   showLabel   = true,
             bool   centerLabel = false,
             bool   boldLabel   = false,
@@ -54,6 +56,8 @@ namespace Sirenix.OdinInspector.ColoredBoxGroup
             B         = b;
             A         = a;
             MarginTop = marginTop;
+            MarginBottom = marginBottom;
+            
             LabelText = label;
             BoldLabel = boldLabel;
         }
