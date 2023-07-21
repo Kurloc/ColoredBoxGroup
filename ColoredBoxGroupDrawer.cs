@@ -1,83 +1,62 @@
+using UnityEngine;
+using System.Diagnostics;
+
 #if UNITY_EDITOR
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
-using UnityEngine;
-
-#if ODIN_INSPECTOR_3
-using Sirenix.OdinInspector.Editor.ValueResolvers;
 #endif
 
-#pragma warning disable
-
-public class ColoredBoxGroupDrawer : OdinGroupDrawer<ColoredBoxGroupAttribute> 
+namespace Sirenix.OdinInspector.ColoredBoxGroup
 {
-    
-#if ODIN_INSPECTOR_3
-    private ValueResolver<string> labelGetter;
-    
-    /// <summary>
-    /// initialize values for colors, labels, etc
-    /// </summary>
-    protected override void Initialize()
+#if UNITY_EDITOR
+    public class ColoredBoxGroupDrawer : OdinGroupDrawer<ColoredBoxGroupAttribute>
     {
-        labelGetter = ValueResolver.GetForString(Property, Attribute.LabelText ?? Attribute.GroupName);
-    }
-#endif
 
-    
-    /// <summary>
-    /// Draw the stuff
-    /// </summary>
-    /// <param name="label">Label string</param>
-    protected override void DrawPropertyLayout(GUIContent label)
-    {
-        GUILayout.Space(Attribute.MarginTop);
-
-        string headerLabel = Attribute.LabelText;
-
-        if (Attribute.ShowLabel)
+        /// <summary>
+        /// Draw the stuff
+        /// </summary>
+        /// <param name="label">Label string</param>
+        protected override void DrawPropertyLayout(GUIContent label)
         {
+            GUILayout.Space(Attribute.MarginTop);
 
-#if ODIN_INSPECTOR_3
-            labelGetter.DrawError();
-            headerLabel = labelGetter.GetValue();
-#endif
-            
-            if (string.IsNullOrEmpty(headerLabel))
-            {
-                headerLabel = "";
-            }
-        }
-
-        GUIHelper.PushColor(new Color(Attribute.R, Attribute.G, Attribute.B, Attribute.A));   
-        SirenixEditorGUI.BeginBox();
-        SirenixEditorGUI.BeginBoxHeader();
-        {
-            GUIHelper.PopColor();
+            var headerLabel = Attribute.LabelText;
 
             if (Attribute.ShowLabel)
             {
-                if(Attribute.CenterLabel)
+                if (string.IsNullOrEmpty(headerLabel))
                 {
-                    SirenixEditorGUI.Title(headerLabel, null, TextAlignment.Center, false, Attribute.BoldLabel);
+                    headerLabel = "";
                 }
-                else
-                {
-                    SirenixEditorGUI.Title(headerLabel, null, TextAlignment.Left, false, Attribute.BoldLabel);
-                }
-
             }
+
+            GUIHelper.PushColor(new Color(Attribute.R, Attribute.G, Attribute.B, Attribute.A));
+            SirenixEditorGUI.BeginBox();
+            SirenixEditorGUI.BeginBoxHeader();
+            {
+                GUIHelper.PopColor();
+
+                if (Attribute.ShowLabel)
+                {
+                    SirenixEditorGUI.Title(headerLabel, null,
+                                           Attribute.CenterLabel ? TextAlignment.Center : TextAlignment.Left, false,
+                                           Attribute.BoldLabel);
+                }
+            }
+
+            SirenixEditorGUI.EndBoxHeader();
+
+            foreach (var t in Property.Children)
+            {
+                t.Draw();
+            }
+
+            SirenixEditorGUI.EndBox();
+
+            GUILayout.Space(Attribute.MarginBottom);
         }
-        SirenixEditorGUI.EndBoxHeader();
-
-        for (int i = 0; i < Property.Children.Count; i++)
-        {
-            Property.Children[i].Draw();
-        }
-
-        SirenixEditorGUI.EndBox();
-
-        GUILayout.Space(Attribute.MarginBottom);
     }
-}
+#else
+    public class ColoredBoxGroupDrawer { }
 #endif
+}
