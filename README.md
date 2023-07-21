@@ -9,11 +9,12 @@
 ## Examples
 ![image](https://github.com/Kurloc/ColoredBoxGroup/assets/57206908/7c94dac6-362d-4eaa-b912-7b9e15188dc7)
 
+
 ## Contributing
 Feel free to dive in! Open an issue or submit PRs!
 
 
-Code Ex
+## Code Examples
 ```csharp
 using Sirenix.OdinInspector.ColoredBoxGroup;
 using UnityEngine;
