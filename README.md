@@ -47,5 +47,8 @@ public class Tester : MonoBehaviour
 }
 ```
 
-## Usage
-This code is not currently namedspaced, but you should place it where you're storing all of the scripts for your game/project. Then namespace it accordingly and import then use the attribute.
+## Install
+1) In the unity editor go to window > package manager > + (in the top left) > add package from GIT URL
+2) Enter `https://github.com/Kurloc/ColoredBoxGroup/blob/main/package.json`
+3) In the unity editor add a reference to the Assembly for ColoredBoxGroup then you should be able to reference & import the types like in the examples.
+
