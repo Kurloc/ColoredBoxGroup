@@ -49,6 +49,6 @@ public class Tester : MonoBehaviour
 
 ## Install
 1) In the unity editor go to window > package manager > + (in the top left) > add package from GIT URL
-2) Enter `https://github.com/Kurloc/ColoredBoxGroup/blob/main/package.json`
+2) Enter `https://github.com/Kurloc/ColoredBoxGroup.git`
 3) In the unity editor add a reference to the Assembly for ColoredBoxGroup then you should be able to reference & import the types like in the examples.
 
